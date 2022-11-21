@@ -21,4 +21,6 @@ LABEL org.opencontainers.image.created="$BUILD_DATE" \
 
 ADD $TARBALL /
 
+ENV LANG=C.UTF-8
+
 CMD ["bash"]
