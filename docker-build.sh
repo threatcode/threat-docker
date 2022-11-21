@@ -44,6 +44,7 @@ podman build --squash \
     --build-arg PROJECT_URL="$PROJECT_URL" \
     --build-arg VCS_REF="$VCS_REF" \
     --build-arg RELEASE_DESCRIPTION="$RELEASE_DESCRIPTION" \
+    --env LANG="C.UTF-8" \
     --tag "$REGISTRY_IMAGE/$IMAGE:$TAG" \
     .
 
