@@ -92,7 +92,7 @@ find "$rootfsDir"/var/log -depth -type f -print0 | xargs -0 truncate -s 0
 rmdir "$rootfsDir/run/mount" 2>/dev/null || :
 
 echo "Creating $tarball"
-tar -C "$rootfsDir" -pczf "$tarball" .
+tar -C "$rootfsDir" --exclude "./dev/**" -pczf "$tarball" .
 
 if [ "$image" = "kali-last-release" ]; then
     (. "$rootfsDir"/etc/os-release && echo "$VERSION") > "$versionFile"
