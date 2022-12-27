@@ -9,7 +9,7 @@ ARCHS="${2:-amd64}"
 BASE_IMAGES="kali-rolling kali-dev kali-last-release"
 EXTRA_IMAGES="kali-experimental kali-bleeding-edge"
 ALL_IMAGES="$BASE_IMAGES $EXTRA_IMAGES"
-ALL_ARCHS="amd64 arm64 armhf"
+ALL_ARCHS="amd64 arm64 armhf i386"
 
 USAGE="Usage: $(basename $0) [IMAGES] [ARCHITECTURES]
 
