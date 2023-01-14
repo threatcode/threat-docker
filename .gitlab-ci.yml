@@ -3,7 +3,7 @@ variables:
     # sorted per order of importance here, both architectures and images.
     BASE_IMAGES: "kali-rolling kali-last-release kali-dev"
     EXTRA_IMAGES: "kali-bleeding-edge kali-experimental"
-    ARCHS: "amd64 arm64 armhf i386"
+    ARCHS: "amd64 arm64 armhf armel i386"
 
 stages:
     - build-rootfs
