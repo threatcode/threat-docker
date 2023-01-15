@@ -9,23 +9,24 @@ ARCHITECTURE=$2
 # Retrieve variables from former docker-build.sh
 . ./"$IMAGE-$ARCHITECTURE".conf
 
+# Get corresponding machine hardware name
 case "$ARCHITECTURE" in
-    amd64) machine="x86_64" ;;
-    arm64) machine="aarch64" ;;
-    armhf) machine="armv7l" ;;
-    armel) machine="armv7l" ;;
-    i386)  machine="x86_64" ;;
+    amd64) MACHINE="x86_64" ;;
+    arm64) MACHINE="aarch64" ;;
+    armel) MACHINE="armv7l" ;;
+    armhf) MACHINE="armv7l" ;;
+    i386)  MACHINE="x86_64" ;;
 esac
 
 if [ "$REGISTRY" != localhost ]; then
     podman pull "$REGISTRY_IMAGE/$IMAGE:$TAG"
 fi
 
-TEST_ARCH=$(podman run --rm "$REGISTRY_IMAGE/$IMAGE:$TAG" uname -m)
-if [ "$machine" == "$TEST_ARCH" ]; then
-    echo "OK: Got expected architecture '$TEST_ARCH'"
+MACH=$(podman run --rm "$REGISTRY_IMAGE/$IMAGE:$TAG" uname -m)
+if [ "$MACH" = "$MACHINE" ]; then
+    echo "OK: Got expected machine hardware name '$MACH'"
 else
-    echo "ERROR: Incorrect architecture '$TEST_ARCH' (expected '$machine')" >&2
+    echo "ERROR: Incorrect machine hardware name '$MACH' (expected '$MACHINE')" >&2
     exit 1
 fi
 
