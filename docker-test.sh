@@ -28,3 +28,11 @@ else
     echo "ERROR: Incorrect architecture '$TEST_ARCH' (expected '$machine')" >&2
     exit 1
 fi
+
+DPKG_ARCH=$(podman run --rm "$REGISTRY_IMAGE/$IMAGE:$TAG" dpkg --print-architecture)
+if [ "$DPKG_ARCH" = "$ARCHITECTURE" ]; then
+    echo "OK: Got expected dpkg architecture '$DPKG_ARCH'"
+else
+    echo "ERROR: Incorrect dpkg architecture '$DPKG_ARCH' (expected '$ARCHITECTURE')" >&2
+    exit 1
+fi
