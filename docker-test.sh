@@ -12,8 +12,8 @@ ARCHITECTURE=$2
 # Get corresponding machine hardware name
 case "$ARCHITECTURE" in
     amd64) MACHINE="x86_64" ;;
-    arm64) MACHINE="aarch64" ;;
     armel) MACHINE="armv7l" ;;
+    arm64) MACHINE="aarch64";;
     armhf) MACHINE="armv7l" ;;
     i386)  MACHINE="x86_64" ;;
 esac
