@@ -44,7 +44,7 @@ fi
 rm -rf "$rootfsDir" "$tarball"
 
 ret=0
-debootstrap --variant=minbase --components=main,contrib,non-free \
+debootstrap --variant=minbase --components=main,contrib,non-free,non-free-firmware \
     --arch="$architecture" --include=kali-archive-keyring \
     "$distro" "$rootfsDir" "$mirror" || ret=$?
 if [ $ret != 0 ]; then
