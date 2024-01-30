@@ -3,12 +3,12 @@
 set -e
 set -u
 
-DISTROS="${*:-kali-rolling}"
+DISTROS="${*:-threat-rolling}"
 EXTRA_DISTROS=""
 ARCHS="amd64"
 
-#DISTROS="kali-rolling kali-dev kali-last-snapshot"
-#EXTRA_DISTROS="kali-experimental kali-bleeding-edge"
+#DISTROS="threat-rolling threat-dev threat-last-snapshot"
+#EXTRA_DISTROS="threat-experimental threat-bleeding-edge"
 #ARCHS="amd64 arm64 armhf"
 
 echo "Distributions: $DISTROS"

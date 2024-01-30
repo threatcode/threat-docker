@@ -8,8 +8,8 @@ ARCHITECTURE=$2
 TARBALL=$DISTRO-$ARCHITECTURE.tar.xz
 VERSIONFILE=$DISTRO-$ARCHITECTURE.release.version
 
-CI_REGISTRY_IMAGE=${CI_REGISTRY_IMAGE:-"kalilinux"}
-PROJECT_URL=${CI_PROJECT_URL:-"https://gitlab.com/kalilinux/build-scripts/kali-docker"}
+CI_REGISTRY_IMAGE=${CI_REGISTRY_IMAGE:-"threatos"}
+PROJECT_URL=${CI_PROJECT_URL:-"https://github.com/threatcode/build-scripts/threat-docker"}
 BUILD_DATE=${CI_JOB_STARTED_AT:-$(date -u +"%Y-%m-%dT%H:%M:%SZ")}
 BUILD_VERSION=$(date -u +"%Y.%m.%d")
 VCS_REF=${CI_COMMIT_SHORT_SHA:-$(git rev-parse --short HEAD)}
@@ -21,8 +21,8 @@ case "$ARCHITECTURE" in
 esac
 
 case "$DISTRO" in
-    kali-last-snapshot)
-        IMAGE=kali
+    threat-last-snapshot)
+        IMAGE=threat
         VERSION=$(cat "$VERSIONFILE")
         RELEASE_DESCRIPTION="$VERSION"
         ;;

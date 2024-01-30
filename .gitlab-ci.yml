@@ -1,7 +1,7 @@
 
 variables:
-    BASE_DISTROS: 'kali-rolling'  # 'kali-rolling kali-dev kali-last-snapshot'
-    EXTRA_DISTROS: 'kali-experimental'  # 'kali-experimental kali-bleeding-edge'
+    BASE_DISTROS: 'threat-rolling'  # 'threat-rolling threat-dev threat-last-snapshot'
+    EXTRA_DISTROS: 'threat-experimental'  # 'threat-experimental threat-bleeding-edge'
     ARCHS: 'arm64'  # 'amd64 arm64 armhf'
 
 stages:
@@ -23,14 +23,14 @@ build-rootfs:
         apt-get -y update
         apt-get -y full-upgrade
         apt-get -y install debootstrap pixz qemu-user-static wget   kmod
-        # Install Kali archive keyring
+        # Install Threat archive keyring
         KEYRING_PKG_URL=$(wget -nv -O - \
-            https://http.kali.org/kali/dists/kali-rolling/main/binary-amd64/Packages.gz \
-            | gzip -dc | grep ^Filename: | grep kali-archive-keyring | head -n 1 | awk '{print $2}')
-        KEYRING_PKG_URL="https://http.kali.org/kali/$KEYRING_PKG_URL"
+            https://threatcode.github.io/threat/dists/threat-rolling/main/binary-amd64/Packages.gz \
+            | gzip -dc | grep ^Filename: | grep threat-archive-keyring | head -n 1 | awk '{print $2}')
+        KEYRING_PKG_URL="https://threatcode.github.io/threat/$KEYRING_PKG_URL"
         wget -nv "$KEYRING_PKG_URL"
-        dpkg -i kali-archive-keyring_*_all.deb
-        rm kali-archive-keyring_*_all.deb
+        dpkg -i threat-archive-keyring_*_all.deb
+        rm threat-archive-keyring_*_all.deb
         # Enable support for additional executable binary formats
         update-binfmts --enable
         echo "Executable binary formats:"
@@ -63,7 +63,7 @@ build-rootfs:
         # in August 2021, /builds is mounted with the option nodev, and it breaks
         # debootstrap. Workaround by using another location.
         # References:
-        # * https://gitlab.com/kalilinux/build-scripts/kali-docker/-/issues/40
+        # * https://github.com/threatcode/build-scripts/threat-docker/-/issues/40
         # * https://gitlab.com/gitlab-com/gl-infra/production/-/issues/5184
         mkdir /work && cp build-rootfs.sh /work && cd /work
         # Build the various rootfs

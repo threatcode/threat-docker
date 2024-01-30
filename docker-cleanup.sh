@@ -3,8 +3,8 @@
 set -e
 set -u
 
-if [ "$1" = "kali-last-snapshot" ]; then
-    REPO=kali
+if [ "$1" = "threat-last-snapshot" ]; then
+    REPO=threat
 else
     REPO=$1
 fi

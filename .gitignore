@@ -1,4 +1,4 @@
-/kali-*.conf
-/kali-*.release.version
-/kali-*.tar.xz
-/rootfs-kali-*
+/threat-*.conf
+/threat-*.release.version
+/threat-*.tar.xz
+/rootfs-threat-*

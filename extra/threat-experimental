@@ -1,0 +1,7 @@
+ARG CI_REGISTRY_IMAGE
+ARG TAG
+FROM $CI_REGISTRY_IMAGE/threat-rolling:$TAG
+
+RUN echo "deb http://threatcode.github.io/threat threat-experimental main contrib non-free" >/etc/apt/sources.list.d/threat-experimental.list
+
+CMD ["bash"]

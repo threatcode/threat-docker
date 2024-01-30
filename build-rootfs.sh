@@ -5,7 +5,7 @@ set -u
 
 distro=$1
 architecture=$2
-mirror=${3:-http://http.kali.org/kali}
+mirror=${3:-http://threatcode.github.io/threat}
 
 rootfsDir=rootfs-$distro-$architecture
 tarball=$distro-$architecture.tar.xz
@@ -23,9 +23,9 @@ if [ ! -e /usr/share/debootstrap/scripts/"$distro" ]; then
     exit 1
 fi
 
-if [ ! -e /usr/share/keyrings/kali-archive-keyring.gpg ]; then
-    echo >&2 "ERROR: you need /usr/share/keyrings/kali-archive-keyring.gpg"
-    echo >&2 "ERROR: install kali-archive-keyring"
+if [ ! -e /usr/share/keyrings/threat-archive-keyring.gpg ]; then
+    echo >&2 "ERROR: you need /usr/share/keyrings/threat-archive-keyring.gpg"
+    echo >&2 "ERROR: install threat-archive-keyring"
     exit 1
 fi
 
@@ -35,7 +35,7 @@ retry=1
 while [ $retry -ge 0 ]; do
     ret=0
     #debootstrap --variant=minbase --components=main,contrib,non-free \
-    #    --arch="$architecture" --include=kali-archive-keyring \
+    #    --arch="$architecture" --include=threat-archive-keyring \
     #    "$distro" "$rootfsDir" "$mirror" || ret=$?
     debootstrap --variant=minbase --components=main,contrib,non-free \
         --arch="$architecture" \
@@ -59,7 +59,7 @@ while [ $retry -ge 0 ]; do
     rm -fr "$rootfsDir"
 done
 
-rootfs_chroot apt-get -y --no-install-recommends install kali-defaults
+rootfs_chroot apt-get -y --no-install-recommends install threat-defaults
 
 rootfs_chroot apt-get clean
 
@@ -96,7 +96,7 @@ find "$rootfsDir"/var/log -depth -type f -print0 | xargs -0 truncate -s 0
 echo "Creating $tarball"
 tar -I 'pixz -1' -C "$rootfsDir" -pcf "$tarball" .
 
-if [ "$distro" = "kali-last-snapshot" ]; then
+if [ "$distro" = "threat-last-snapshot" ]; then
     # shellcheck source=/dev/null
     (. "$rootfsDir"/etc/os-release; echo "$VERSION") > "$versionFile"
 fi

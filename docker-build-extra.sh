@@ -6,11 +6,11 @@ set -u
 DISTRO=$1
 ARCHITECTURE=$2
 
-CI_REGISTRY_IMAGE=${CI_REGISTRY_IMAGE:-"kalilinux"}
+CI_REGISTRY_IMAGE=${CI_REGISTRY_IMAGE:-"threatos"}
 
-# Build the same version as for kali-rolling
+# Build the same version as for threat-rolling
 # shellcheck source=/dev/null
-VERSION=$(. ./kali-rolling-"$ARCHITECTURE".conf; echo "$VERSION")
+VERSION=$(. ./threat-rolling-"$ARCHITECTURE".conf; echo "$VERSION")
 IMAGE=$DISTRO
 
 case "$ARCHITECTURE" in
